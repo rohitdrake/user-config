@@ -6,9 +6,8 @@ let app = express();
 
 app.get('/', (req, res)=>{
   let objInfo = {};
-  let address = forwarded(req, req.headers);
   objInfo.ua = req.headers['user-agent'];
-  objInfo.ua = typeof ua;
+  let address = forwarded(req, req.headers);
   objInfo.ip = address.ip;
   res.send(objInfo);
 });
