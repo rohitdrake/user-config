@@ -6,7 +6,15 @@ let app = express();
 
 app.get('/', (req, res)=>{
   let objInfo = {};
-  objInfo.ua = req.headers['user-agent'];
+  objInfo.language = req.headers['accept-language'];
+  objInfo.software = (()=>{
+    let localVariable;
+    let text = req.headers['user-agent'];
+    text.replace(/\(([^)])+\)/, (match)=>{
+      localVariable = match;
+    });
+    return localVariable;
+  })();
   let address = forwarded(req, req.headers);
   objInfo.ip = address.ip;
   res.send(objInfo);
