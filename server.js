@@ -4,7 +4,9 @@ const port    = process.env.PORT || 3000;
 
 let app = express();
 
-app.get('/', (req, res)=>{
+app.use('/', express.static(__dirname+'/public'));
+
+app.get('/userConfig', (req, res)=>{
   let objInfo = {};
   objInfo.language = req.headers['accept-language'];
   objInfo.software = (()=>{
